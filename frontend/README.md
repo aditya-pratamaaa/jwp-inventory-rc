@@ -49,7 +49,7 @@ Sistem Manajemen Inventory Sparepart RC. Aplikasi ini dirancang untuk mengelola 
 
 - Akun Admin: Username: admin, Password: admin@123.
 - Registrasi: Pengguna diperbolehkan mendaftarkan akun baru melalui halaman register.
-- Masa Berlaku Token: Token JWT hanya berlaku selama 1 jam.
+- Masa Berlaku Token: Token JWT hanya berlaku selama 30 Hari.
 - Fitur Logout: Saat ini fitur logout belum diimplementasikan di antarmuka pengguna.
 - Solusi Token Kadaluarsa: Jika data tidak muncul (karena token habis), silakan buka console browser dan jalankan perintah localStorage.removeItem("token"); lalu lakukan login ulang.
 

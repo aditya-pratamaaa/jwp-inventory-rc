@@ -19,4 +19,9 @@ export const sidebarMenu = [
     icon: "mdi-swap-horizontal",
     path: "/transaction",
   },
+  {
+    title: "Request Barang",
+    icon: "mdi-playlist-plus",
+    path: "/requests",
+  },
 ];

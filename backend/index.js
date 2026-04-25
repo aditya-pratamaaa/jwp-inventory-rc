@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign(
       { id: user.id, username: user.username },
       process.env.JWT_SECRET || "SECRET_KEY",
-      { expiresIn: "1h" },
+      { expiresIn: "30d" },
     );
 
     res.json({
@@ -338,6 +338,90 @@ app.get("/api/stok/:id", authMiddleware, async (req, res) => {
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: "Error get stok" });
+  }
+});
+
+app.get("/api/requests", authMiddleware, async (req, res) => {
+  try {
+    const data = await prisma.requestBarang.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: "Gagal mengambil data request" });
+  }
+});
+
+app.post("/api/requests", authMiddleware, async (req, res) => {
+  try {
+    const { nama_barang, nama_pemohon, kontak, catatan } = req.body;
+
+    const newRequest = await prisma.requestBarang.create({
+      data: {
+        nama_barang,
+        nama_pemohon,
+        kontak,
+        catatan,
+      },
+    });
+
+    res.json({ message: "Request berhasil dicatat", data: newRequest });
+  } catch (error) {
+    res.status(500).json({ message: "Gagal mencatat request" });
+  }
+});
+
+app.get("/api/requests/:id", authMiddleware, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const data = await prisma.requestBarang.findUnique({
+      where: { id },
+    });
+
+    if (!data) {
+      return res.status(404).json({ message: "Data tidak ditemukan" });
+    }
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+app.put("/api/requests/:id", authMiddleware, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { nama_barang, nama_pemohon, kontak, catatan } = req.body;
+
+    const updated = await prisma.requestBarang.update({
+      where: { id },
+      data: {
+        nama_barang,
+        nama_pemohon,
+        kontak,
+        catatan,
+      },
+    });
+
+    res.json({ message: "Data request diupdate", data: updated });
+  } catch (error) {
+    res.status(500).json({ message: "Gagal update request" });
+  }
+});
+
+app.delete("/api/requests/:id", authMiddleware, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    await prisma.requestBarang.delete({
+      where: { id },
+    });
+
+    res.json({ message: "Data request dihapus" });
+  } catch (error) {
+    res.status(500).json({ message: "Gagal menghapus data" });
   }
 });
 

@@ -42,3 +42,12 @@ model Stok {
 
   barang        Barang @relation(fields: [kode_barang], references: [kode_barang])
 }
+
+model RequestBarang {
+  id             Int      @id @default(autoincrement())
+  nama_barang    String
+  nama_pemohon   String
+  kontak         String
+  catatan        String?
+  createdAt      DateTime @default(now())
+}

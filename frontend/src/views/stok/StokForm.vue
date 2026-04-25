@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <h1 class="title">Tambah / Update Stok</h1>
+      <h1 class="title">Update Stok</h1>
     </div>
 
     <div class="form-card">
@@ -83,7 +83,7 @@ const submitStok = async () => {
 
     if (isEdit.value) {
       url = `http://localhost:3000/api/stok`;
-      method = "POST"; // tetap POST karena upsert
+      method = "POST";
     }
 
     const response = await fetch(url, {

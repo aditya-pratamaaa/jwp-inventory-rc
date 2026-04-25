@@ -65,6 +65,24 @@ const routes = [
     component: () => import("@/views/Transaction.vue"),
     meta: { layout: "dashboard" },
   },
+  {
+    path: "/requests",
+    name: "Requests",
+    component: () => import("@/views/request/Request.vue"),
+    meta: { layout: "dashboard" },
+  },
+  {
+    path: "/requests/form",
+    name: "RequestsForm",
+    component: () => import("@/views/request/RequestForm.vue"),
+    meta: { layout: "dashboard" },
+  },
+  {
+    path: "/requests-form/:id/edit",
+    name: "RequestsEdit",
+    component: () => import("@/views/request/RequestForm.vue"),
+    meta: { layout: "dashboard" },
+  },
 ];
 
 const router = createRouter({

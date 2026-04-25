@@ -5,7 +5,7 @@
 -- Dumped from database version 17.5
 -- Dumped by pg_dump version 17.5
 
--- Started on 2026-04-24 22:19:05
+-- Started on 2026-04-25 11:00:03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -38,6 +38,48 @@ CREATE TABLE public."Barang" (
 ALTER TABLE public."Barang" OWNER TO postgres;
 
 --
+-- TOC entry 226 (class 1259 OID 58103)
+-- Name: RequestBarang; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."RequestBarang" (
+    id integer NOT NULL,
+    nama_barang text NOT NULL,
+    nama_pemohon text NOT NULL,
+    kontak text NOT NULL,
+    catatan text,
+    "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."RequestBarang" OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 58102)
+-- Name: RequestBarang_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."RequestBarang_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."RequestBarang_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 4949 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: RequestBarang_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."RequestBarang_id_seq" OWNED BY public."RequestBarang".id;
+
+
+--
 -- TOC entry 224 (class 1259 OID 58001)
 -- Name: Stok; Type: TABLE; Schema: public; Owner: postgres
 --
@@ -68,7 +110,7 @@ CREATE SEQUENCE public."Stok_id_seq"
 ALTER SEQUENCE public."Stok_id_seq" OWNER TO postgres;
 
 --
--- TOC entry 4938 (class 0 OID 0)
+-- TOC entry 4950 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: Stok_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -108,7 +150,7 @@ CREATE SEQUENCE public."Transaksi_kode_transaksi_seq"
 ALTER SEQUENCE public."Transaksi_kode_transaksi_seq" OWNER TO postgres;
 
 --
--- TOC entry 4939 (class 0 OID 0)
+-- TOC entry 4951 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: Transaksi_kode_transaksi_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -147,7 +189,7 @@ CREATE SEQUENCE public."User_id_seq"
 ALTER SEQUENCE public."User_id_seq" OWNER TO postgres;
 
 --
--- TOC entry 4940 (class 0 OID 0)
+-- TOC entry 4952 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: User_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -175,7 +217,15 @@ CREATE TABLE public._prisma_migrations (
 ALTER TABLE public._prisma_migrations OWNER TO postgres;
 
 --
--- TOC entry 4764 (class 2604 OID 58004)
+-- TOC entry 4771 (class 2604 OID 58106)
+-- Name: RequestBarang id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."RequestBarang" ALTER COLUMN id SET DEFAULT nextval('public."RequestBarang_id_seq"'::regclass);
+
+
+--
+-- TOC entry 4769 (class 2604 OID 58004)
 -- Name: Stok id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -183,7 +233,7 @@ ALTER TABLE ONLY public."Stok" ALTER COLUMN id SET DEFAULT nextval('public."Stok
 
 
 --
--- TOC entry 4763 (class 2604 OID 57931)
+-- TOC entry 4768 (class 2604 OID 57931)
 -- Name: Transaksi kode_transaksi; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -191,7 +241,7 @@ ALTER TABLE ONLY public."Transaksi" ALTER COLUMN kode_transaksi SET DEFAULT next
 
 
 --
--- TOC entry 4762 (class 2604 OID 57915)
+-- TOC entry 4767 (class 2604 OID 57915)
 -- Name: User id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -199,7 +249,7 @@ ALTER TABLE ONLY public."User" ALTER COLUMN id SET DEFAULT nextval('public."User
 
 
 --
--- TOC entry 4928 (class 0 OID 57920)
+-- TOC entry 4937 (class 0 OID 57920)
 -- Dependencies: 220
 -- Data for Name: Barang; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -214,7 +264,18 @@ COPY public."Barang" (kode_barang, nama_barang, harga_barang) FROM stdin;
 
 
 --
--- TOC entry 4932 (class 0 OID 58001)
+-- TOC entry 4943 (class 0 OID 58103)
+-- Dependencies: 226
+-- Data for Name: RequestBarang; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."RequestBarang" (id, nama_barang, nama_pemohon, kontak, catatan, "createdAt") FROM stdin;
+3	Casis 	Budi	08976789567	Permintaan baru 	2026-04-25 03:58:40.609
+\.
+
+
+--
+-- TOC entry 4941 (class 0 OID 58001)
 -- Dependencies: 224
 -- Data for Name: Stok; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -229,7 +290,7 @@ COPY public."Stok" (id, kode_barang, jumlah_stok) FROM stdin;
 
 
 --
--- TOC entry 4930 (class 0 OID 57928)
+-- TOC entry 4939 (class 0 OID 57928)
 -- Dependencies: 222
 -- Data for Name: Transaksi; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -241,7 +302,7 @@ COPY public."Transaksi" (kode_transaksi, kode_barang, jumlah_barang, total_harga
 
 
 --
--- TOC entry 4927 (class 0 OID 57912)
+-- TOC entry 4936 (class 0 OID 57912)
 -- Dependencies: 219
 -- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -252,7 +313,7 @@ COPY public."User" (id, username, password) FROM stdin;
 
 
 --
--- TOC entry 4925 (class 0 OID 57902)
+-- TOC entry 4934 (class 0 OID 57902)
 -- Dependencies: 217
 -- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -260,11 +321,21 @@ COPY public."User" (id, username, password) FROM stdin;
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
 781b6293-18d0-4010-9056-9e41d29c2658	453b97525e171c5f4ddc26d067211fdd19e79b3994756becf8937722b57c983c	2026-04-23 21:53:59.41334+07	20260423145359_init_database_schema	\N	\N	2026-04-23 21:53:59.369304+07	1
 71c0c55d-c18d-4919-b58b-51f0b33373a6	bd5f5a4a8a190563bee0397c97577c87e38f4e7f2443170396d181c8afc2aa08	2026-04-24 20:39:15.662698+07	20260424133915_add_stok_table	\N	\N	2026-04-24 20:39:15.53147+07	1
+384fd6bf-a5a5-426c-a001-ccc882ffad32	a882d5b3eef52d1072ec60bf20ba2516abb09e17f55cdf471c126f88c8afe2db	2026-04-25 10:04:11.140156+07	20260425030410_add_request_barang	\N	\N	2026-04-25 10:04:10.991449+07	1
 \.
 
 
 --
--- TOC entry 4941 (class 0 OID 0)
+-- TOC entry 4953 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: RequestBarang_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."RequestBarang_id_seq"', 3, true);
+
+
+--
+-- TOC entry 4954 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: Stok_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -273,7 +344,7 @@ SELECT pg_catalog.setval('public."Stok_id_seq"', 7, true);
 
 
 --
--- TOC entry 4942 (class 0 OID 0)
+-- TOC entry 4955 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: Transaksi_kode_transaksi_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -282,7 +353,7 @@ SELECT pg_catalog.setval('public."Transaksi_kode_transaksi_seq"', 7, true);
 
 
 --
--- TOC entry 4943 (class 0 OID 0)
+-- TOC entry 4956 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: User_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -291,7 +362,7 @@ SELECT pg_catalog.setval('public."User_id_seq"', 4, true);
 
 
 --
--- TOC entry 4772 (class 2606 OID 57926)
+-- TOC entry 4779 (class 2606 OID 57926)
 -- Name: Barang Barang_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -300,7 +371,16 @@ ALTER TABLE ONLY public."Barang"
 
 
 --
--- TOC entry 4777 (class 2606 OID 58007)
+-- TOC entry 4786 (class 2606 OID 58111)
+-- Name: RequestBarang RequestBarang_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."RequestBarang"
+    ADD CONSTRAINT "RequestBarang_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4784 (class 2606 OID 58007)
 -- Name: Stok Stok_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -309,7 +389,7 @@ ALTER TABLE ONLY public."Stok"
 
 
 --
--- TOC entry 4774 (class 2606 OID 57933)
+-- TOC entry 4781 (class 2606 OID 57933)
 -- Name: Transaksi Transaksi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -318,7 +398,7 @@ ALTER TABLE ONLY public."Transaksi"
 
 
 --
--- TOC entry 4769 (class 2606 OID 57919)
+-- TOC entry 4776 (class 2606 OID 57919)
 -- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -327,7 +407,7 @@ ALTER TABLE ONLY public."User"
 
 
 --
--- TOC entry 4767 (class 2606 OID 57910)
+-- TOC entry 4774 (class 2606 OID 57910)
 -- Name: _prisma_migrations _prisma_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -336,7 +416,7 @@ ALTER TABLE ONLY public._prisma_migrations
 
 
 --
--- TOC entry 4775 (class 1259 OID 58008)
+-- TOC entry 4782 (class 1259 OID 58008)
 -- Name: Stok_kode_barang_key; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -344,7 +424,7 @@ CREATE UNIQUE INDEX "Stok_kode_barang_key" ON public."Stok" USING btree (kode_ba
 
 
 --
--- TOC entry 4770 (class 1259 OID 57934)
+-- TOC entry 4777 (class 1259 OID 57934)
 -- Name: User_username_key; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -352,7 +432,7 @@ CREATE UNIQUE INDEX "User_username_key" ON public."User" USING btree (username);
 
 
 --
--- TOC entry 4779 (class 2606 OID 58009)
+-- TOC entry 4788 (class 2606 OID 58009)
 -- Name: Stok Stok_kode_barang_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -361,7 +441,7 @@ ALTER TABLE ONLY public."Stok"
 
 
 --
--- TOC entry 4778 (class 2606 OID 57935)
+-- TOC entry 4787 (class 2606 OID 57935)
 -- Name: Transaksi Transaksi_kode_barang_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -369,7 +449,7 @@ ALTER TABLE ONLY public."Transaksi"
     ADD CONSTRAINT "Transaksi_kode_barang_fkey" FOREIGN KEY (kode_barang) REFERENCES public."Barang"(kode_barang) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
--- Completed on 2026-04-24 22:19:06
+-- Completed on 2026-04-25 11:00:04
 
 --
 -- PostgreSQL database dump complete
